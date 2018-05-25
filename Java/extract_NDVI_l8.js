@@ -4,7 +4,7 @@
 
 // ==============================================================
 // Create Function
-var getndvi = function(begin, end, cloud_cover_filter, filename, countryname){
+var extract_NDVI_l8 = function(begin, end, countryname, cloud_cover_filter, filename, google_drive_folder_name){
   // Import Country Data
   var countries = ee.FeatureCollection('ft:1tdSwUL7MVpOauSgRzqVTOwdfy17KDbw-1d9omPw');
   var country = countries.filter(ee.Filter.eq('Country', countryname));
@@ -29,7 +29,7 @@ var getndvi = function(begin, end, cloud_cover_filter, filename, countryname){
   var ndvi_median_country = ndvi_median.clip(country);
   
   Export.image.toDrive({
-    folder: "gee_extracts",
+    folder: google_drive_folder_name,
     image: ndvi_median_country,
     scale: 30,
     region: country,
@@ -40,23 +40,6 @@ var getndvi = function(begin, end, cloud_cover_filter, filename, countryname){
 
 };
 
-// Create NDVI Variables and Export ========================================
-var ndvi_2013_C = getndvi('2013-07-01', '2013-08-31', 50, 'ndvi_2013_C', 'Rwanda');
+// Example ========================================================================
+var ndvi_rwanda_20130701_20130831 = extract_NDVI_l8('2013-07-01', '2013-08-31', 'Rwanda', 50, 'ndvi_2013_C', 'gee_extracts');
 
-var ndvi_2014_A = getndvi('2013-09-01', '2014-02-28', 50, 'ndvi_2014_A', 'Rwanda');
-var ndvi_2014_B = getndvi('2014-03-01', '2014-06-30', 50, 'ndvi_2014_B', 'Rwanda');
-var ndvi_2014_C = getndvi('2014-07-01', '2014-08-31', 50, 'ndvi_2014_C', 'Rwanda');
-
-var ndvi_2015_A = getndvi('2014-09-01', '2015-02-28', 50, 'ndvi_2015_A', 'Rwanda');
-var ndvi_2015_B = getndvi('2015-03-01', '2015-06-30', 50, 'ndvi_2015_B', 'Rwanda');
-var ndvi_2015_C = getndvi('2015-07-01', '2015-08-31', 50, 'ndvi_2015_C', 'Rwanda');
-
-var ndvi_2016_A = getndvi('2015-09-01', '2016-02-28', 50, 'ndvi_2016_A', 'Rwanda');
-var ndvi_2016_B = getndvi('2016-03-01', '2016-06-30', 50, 'ndvi_2016_B', 'Rwanda');
-var ndvi_2016_C = getndvi('2016-07-01', '2016-08-31', 50, 'ndvi_2016_C', 'Rwanda');
-
-var ndvi_2017_A = getndvi('2016-09-01', '2017-02-28', 50, 'ndvi_2017_A', 'Rwanda');
-var ndvi_2017_B = getndvi('2017-03-01', '2017-06-30', 50, 'ndvi_2017_B', 'Rwanda');
-var ndvi_2017_C = getndvi('2017-07-01', '2017-08-31', 50, 'ndvi_2017_C', 'Rwanda');
-
-var ndvi_2018_A = getndvi('2017-09-01', '2018-02-28', 50, 'ndvi_2018_A', 'Rwanda');
