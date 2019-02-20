@@ -100,12 +100,13 @@ def download_image_aggregate(image_type, country, begin_date, end_date, reduce_t
             implement_download = True
 
         print("Waiting for File to Download ...")
-        time.sleep(2)
+        time.sleep(3)
 
     files_after = glob.glob(get_download_path() + "/*.zip")
     zip_file = list(set(files_after) - set(files_initial))
 
     # Rename and Send Files to Folder
+    time.sleep(.3)
     dir_files_initial = glob.glob(directory + "/*")
 
     zip_ref = zipfile.ZipFile(zip_file[0], 'r')
@@ -117,15 +118,18 @@ def download_image_aggregate(image_type, country, begin_date, end_date, reduce_t
     extracted_files = list(set(dir_files_after) - set(dir_files_initial))
 
     # Delete .tfw file
+    time.sleep(.3)
     os.remove(extracted_files[0])
 
     # Rename .tif file
+    time.sleep(.3)
     os.rename(extracted_files[1], os.path.abspath(directory + "/" + name))
 
     # Delete zip file
+    time.sleep(.3)
     os.remove(zip_file[0])
 
-    print("Done! File saved to: " + os.path.abspath(directory + "/" + name))
+    print("Done. File saved to: " + os.path.abspath(directory + "/" + name))
 
 # Examples
 #download_image_aggregate("viirs", "Rwanda", "2015-01-01", "2015-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_viirs_2015.tif')
