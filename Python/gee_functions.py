@@ -21,7 +21,7 @@ def get_download_path():
     else:
         return os.path.join(os.path.expanduser('~'), 'downloads')
 
-def download_image_aggregate(image_type, country, begin_date, end_date, reduce_type, directory, name, cloud_cover_filter=50):
+def download_image_aggregate(image_type, country, begin_date, end_date, reduce_type, directory, name, resolution = 'Original', cloud_cover_filter=50):
     """Downloads VIIRS Image for a Country"""
 
     directory = os.path.abspath(directory)
@@ -55,7 +55,7 @@ def download_image_aggregate(image_type, country, begin_date, end_date, reduce_t
     if(image_type == "l8_ndvi"):
         image = ee.ImageCollection('LANDSAT/LC08/C01/T1_TOA');
         image = ee.ImageCollection(image.filter(ee.Filter.lt('CLOUD_COVER', cloud_cover_filter)))
-        scale = 250
+        scale = 30
 
     # Filter by dates
     image = ee.ImageCollection(image.filterDate(begin_date,end_date))
@@ -80,9 +80,12 @@ def download_image_aggregate(image_type, country, begin_date, end_date, reduce_t
     # Clip to country
     image = image.clip(country)
 
+    if resolution == 'Original':
+        resolution = scale
+
     # Download Image -----------------------------------------------------------
     path = image.getDownloadUrl({
-        'scale': scale,
+        'scale': resolution,
         'crs': 'EPSG:4326',
         'region': country.geometry().getInfo()['coordinates']
     })
@@ -129,8 +132,4 @@ def download_image_aggregate(image_type, country, begin_date, end_date, reduce_t
 # Examples
 #download_image_aggregate("viirs", "Rwanda", "2015-01-01", "2015-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_viirs_2015.tif')
 #download_image_aggregate("modis_evi", "Rwanda", "2010-01-01", "2010-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_mevi_2015.tif')
-#download_image_aggregate("l8_ndvi", "Rwanda", "2018-01-01", "2018-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_l8_ndvi_2018_v2.tif')
-
-
-import requests
-exec(requests.get('https://raw.githubusercontent.com/ramarty/Google-Earth-Engine-Tools/master/Python/gee_functions.py').text)
+#download_image_aggregate("l8_ndvi", "Rwanda", "2018-01-01", "2018-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_l8_ndvi_2018_v9.tif', 100)

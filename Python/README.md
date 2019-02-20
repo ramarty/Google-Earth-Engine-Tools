@@ -9,7 +9,7 @@ Contains functions for downloading data from GEE using python.
 
 ## Functions
 
-**download_image_aggregate** *(image_type, country, begin_date, end_date, reduce_type, directory, name, cloud_cover_filter)*
+**download_image_aggregate** *(image_type, country, begin_date, end_date, reduce_type, directory, name, resolution, cloud_cover_filter)*
 
 Downloads a .tif file of satellite image. If multiple images across time, aggregates images into one image using either mean, median or max.
 
@@ -20,10 +20,13 @@ Downloads a .tif file of satellite image. If multiple images across time, aggreg
 - *reduce_type:* Reduce type of images ('mean', 'median' or 'max')
 - *directory:* Directory where to save new tile
 - *name:* Name of new file (e.g., 'new_raster.tif')
+- *resolution* Resolution (in meters) of the resulting image. Defaults to original resolution of image.
 - *cloud_cover_filter:* Removes images with a cloud cover greater than percent (default = 50). (Only used for landsat images)
 
 Examples:
 
     download_image_aggregate("viirs", "Rwanda", "2015-01-01", "2015-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_viirs_2015.tif')
-    download_image_aggregate("modis_evi", "Rwanda", "2010-01-01", "2010-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_modis_evi_2010.tif')
+    download_image_aggregate("dmspols", "Rwanda", "2010-01-01", "2010-12-31", "median", "/Users/robmarty/Desktop/test", 'rwa_dmspols_2010.tif')
+    download_image_aggregate("modis_ndvi", "Rwanda", "2015-01-01", "2015-12-31", "median", "/Users/robmarty/Desktop/test", 'rwa_modis_ndvi_2015.tif')
     download_image_aggregate("l8_ndvi", "Rwanda", "2018-01-01", "2018-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_l8_ndvi_2018.tif')
+    download_image_aggregate("l8_ndvi", "Rwanda", "2018-01-01", "2018-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_l8_ndvi_2018_100meter_res.tif', 100)
