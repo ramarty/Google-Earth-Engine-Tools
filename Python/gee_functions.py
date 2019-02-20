@@ -130,3 +130,7 @@ def download_image_aggregate(image_type, country, begin_date, end_date, reduce_t
 #download_image_aggregate("viirs", "Rwanda", "2015-01-01", "2015-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_viirs_2015.tif')
 #download_image_aggregate("modis_evi", "Rwanda", "2010-01-01", "2010-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_mevi_2015.tif')
 #download_image_aggregate("l8_ndvi", "Rwanda", "2018-01-01", "2018-12-31", "mean", "/Users/robmarty/Desktop/test", 'rwa_l8_ndvi_2018_v2.tif')
+
+
+import requests
+exec(requests.get('https://raw.githubusercontent.com/ramarty/Google-Earth-Engine-Tools/master/Python/gee_functions.py').text)
