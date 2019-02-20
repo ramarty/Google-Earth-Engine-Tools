@@ -129,6 +129,7 @@ def download_image_aggregate(image_type, country, begin_date, end_date, reduce_t
     time.sleep(.3)
     os.remove(zip_file[0])
 
+    time.sleep(2)
     print("Done. File saved to: " + os.path.abspath(directory + "/" + name))
 
 # Examples
