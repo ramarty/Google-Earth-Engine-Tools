@@ -20,7 +20,7 @@ Downloads a .tif file of satellite image. If multiple images across time, aggreg
 - *reduce_type:* Reduce type of images ('mean', 'median' or 'max')
 - *directory:* Directory where to save new tile
 - *name:* Name of new file (e.g., 'new_raster.tif')
-- *resolution* Resolution (in meters) of the resulting image. Defaults to original resolution of image.
+- *resolution:* Resolution (in meters) of the resulting image. Defaults to original resolution of image.
 - *cloud_cover_filter:* Removes images with a cloud cover greater than percent (default = 50). (Only used for landsat images)
 
 Examples:
