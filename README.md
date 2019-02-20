@@ -1,5 +1,10 @@
-# Google-Earth-Engine-Tools
+# Google-Earth-Engine-Downloader
 
-Code for working with Google Earth Engine (GEE). The **JavaScript** folder contains code to run in the GEE code editor; the **Python** folder contains code to run in Python.
+Code for downloading images from Google Earth Engine (GEE) for a specific country and time period. The **JavaScript** folder contains code to run in the GEE code editor; the **Python** folder contains code to run in Python.
 
-The scripts process and extract imagery for a single country. The goal is to extract imagery into a size that is typically small enough to work with locally.
+The scripts download .tif files of images. The JavaScript code uploads the files to a folder in google drive, while the Python code downloads the file locally to a user-specified directory.
+
+## Installation for Python code
+
+    import requests
+    exec(requests.get('https://raw.githubusercontent.com/ramarty/Google-Earth-Engine-Tools/master/Python/gee_functions.py').text)
