@@ -6,8 +6,6 @@ import time
 import zipfile
 ee.Initialize()
 
-# TODO: Delete zip file from downloads folder.
-
 # https://stackoverflow.com/questions/35851281/python-finding-the-users-downloads-folder
 def get_download_path():
     """Returns the default downloads path for linux or windows"""
